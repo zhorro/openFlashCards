@@ -4,6 +4,8 @@
 
 #include <QDebug>
 
+#include <QDir>
+
 #include <QThreadPool>
 #include <QTextStream>
 
@@ -65,6 +67,7 @@ void importerWindow::saveCard   (QString word, QByteArray translation)
 {
 	ui->plainTextEdit->appendPlainText (word);
 
+    QDir::current().mkpath("replays/");
 	QFile file ("replays/"+word+".html");
 	file.open (QIODevice::WriteOnly);
 	file.write(translation);
@@ -77,6 +80,7 @@ void importerWindow::saveCard   (QString word, QByteArray translation)
 	
 	QWebElementCollection perevod = frame->findAllElements(".b-translate p");
 
+    QDir::current().mkpath("translations/");
 	QFile transFile (QString("translations/%1.txt").arg(header.toPlainText()));
 	transFile.open(QIODevice::WriteOnly);
 	QTextStream io (&transFile);

@@ -21,8 +21,7 @@ void wordsBuilder::next()
 		return;
 
 	active = true;
-	QNetworkRequest request (QUrl("http://m.slovari.yandex.ru/translate.xml?text="+words[0]+"&lang="+request));
-	manager->get(request);
+    manager->get(QNetworkRequest(QUrl(QString("http://m.slovari.yandex.ru/translate.xml?text=%1&lang=%2").arg(words[0]).arg(request))));
 }
 
 void wordsBuilder::replyFinished (QNetworkReply * reply)
