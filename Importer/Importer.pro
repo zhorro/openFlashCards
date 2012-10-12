@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         importerwindow.cpp \
-    wordsbuilder.cpp
+    wordsbuilder.cpp \
+    picturesdownloader.cpp
 
 HEADERS  += importerwindow.h \
-    wordsbuilder.h
+    wordsbuilder.h \
+    picturesdownloader.h
 
 FORMS    += importerwindow.ui
