@@ -68,12 +68,24 @@
     <ClCompile Include="GeneratedFiles\Release\moc_wordsbuilder.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="picturesdownloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_picturesdownloader.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_picturesdownloader.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="importerwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="wordsbuilder.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="picturesdownloader.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

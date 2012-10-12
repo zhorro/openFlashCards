@@ -5,14 +5,15 @@
 #include <QThread>
 #include <QStringList>
 #include <QNetworkAccessManager>
-
-extern QNetworkAccessManager *manager;
+#include <QWebPage>
 
 class picturesDownloader : public QThread
 {
     Q_OBJECT
 
     QNetworkAccessManager * manager;
+	QWebPage page;
+
     bool active;
     void next();
     QString request;

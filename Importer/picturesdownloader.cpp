@@ -3,6 +3,9 @@
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QWebFrame>
+#include <QWebElement>
+#include <QWebElementCollection>
 #include <QFile>
 
 #include "picturesdownloader.h"
@@ -29,7 +32,13 @@ void picturesDownloader::replyFinished (QNetworkReply * reply)
     active = false;
     QByteArray R = reply->readAll();
 
+	QWebFrame * frame = page.mainFrame();
+	frame->setContent (R);
+	QWebElementCollection imgs = frame->findAllElements("img");
+	foreach (QWebElement img, imgs)
+	{
 
+	}
 
     next();
 }
