@@ -1,0 +1,14 @@
+Importer-build-desktop-Qt_4_8_0_for_Desktop_-_MSVC2010__Qt_SDK__Debug/*
+Importer/debug/*
+Importer/GeneratedFiles/*
+Importer/images/*
+Importer/Importer.opensdf
+Importer/Importer.pro.user
+Importer/Importer.sdf
+Importer/ipch/*
+Importer/replays/*
+Importer/translations/*
+Importer/ui_importerwindow.h
+Importer/vc100.pdb
+Importer/Importer.vcxproj.user
+Importer/Importer.suo

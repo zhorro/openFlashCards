@@ -6,6 +6,7 @@
 #include <QWebPage>
 
 #include "wordsbuilder.h"
+#include "picturesdownloader.h"
 
 namespace Ui {
 class importerWindow;
@@ -34,9 +35,12 @@ private:
 	wordsBuilder * cleanWords;
 	wordsBuilder * backtransl;
 
+	picturesDownloader * pica;
+
 signals:
 	void wowNewWord (QString word);
 	void translateItBack (QString word);
+	void picturize (QString work);
 };
 
 #endif // IMPORTERWINDOW_H

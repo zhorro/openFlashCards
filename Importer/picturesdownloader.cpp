@@ -1,20 +1,22 @@
-#include <QTextStream>
 #include <QDebug>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include <QDir>
+#include <QFile>
+#include <QImage>
+#include <QPainter>
+#include <QPicture>
+
 #include <QWebFrame>
 #include <QWebElement>
 #include <QWebElementCollection>
-#include <QFile>
 
 #include "picturesdownloader.h"
 
-picturesDownloader::picturesDownloader(QString lang) :
-    request(lang)
+QSize picSizes (640, 480);
+
+picturesDownloader::picturesDownloader()
 {
-    manager = new QNetworkAccessManager(this);
-    connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(replyFinished(QNetworkReply*)));
+	page.setViewportSize(picSizes);
+    connect(page.mainFrame(), SIGNAL(loadFinished (bool)), this, SLOT(pageLoaded(bool)));
     active = false;
 }
 
@@ -24,23 +26,29 @@ void picturesDownloader::next()
         return;
 
     active = true;
-    manager->get(QNetworkRequest(QUrl(QString("http://%1.jpg.to").arg(words[0]))));
+    page.mainFrame()->load(QUrl(QString("http://%1.jpg.to").arg(words[0])));
 }
 
-void picturesDownloader::replyFinished (QNetworkReply * reply)
+void picturesDownloader::pageLoaded( bool ok )
 {
     active = false;
-    QByteArray R = reply->readAll();
+	if (!ok)
+		next();
 
-	QWebFrame * frame = page.mainFrame();
-	frame->setContent (R);
-	QWebElementCollection imgs = frame->findAllElements("img");
-	foreach (QWebElement img, imgs)
-	{
+	QWebElement imgs = page.mainFrame()->findFirstElement("img");
+	QImage   img (imgs.geometry().size(), QImage::Format_ARGB32);
+	// QImage   img (page.mainFrame()->contentsSize(), QImage::Format_ARGB32);
+	QPainter painter;
+	painter.begin(&img);
+	page.mainFrame()->render(&painter);
 
-	}
+	painter.end();
+	QDir::current().mkdir("images");
+	img.save(QString("images/%1.jpeg").arg(words[0]), "JPEG");
 
+	words.removeFirst();
     next();
+	
 }
 
 void picturesDownloader::add(QString newWord)

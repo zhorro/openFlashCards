@@ -11,18 +11,16 @@ class picturesDownloader : public QThread
 {
     Q_OBJECT
 
-    QNetworkAccessManager * manager;
 	QWebPage page;
 
     bool active;
     void next();
-    QString request;
 public:
     QStringList words;
-    explicit picturesDownloader(QString lang);
+	explicit picturesDownloader();
 
 public slots:
-    void replyFinished (QNetworkReply*);
+	void pageLoaded (bool ok);
     void add (QString);
 
 signals:

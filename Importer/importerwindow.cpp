@@ -21,12 +21,16 @@ importerWindow::importerWindow(QWidget *parent) :
 	words      = new wordsBuilder ("es-ru-es");
 	cleanWords = new wordsBuilder ("es-ru-es");
 	backtransl = new wordsBuilder ("es-ru-es");
+	pica	   = new picturesDownloader();
 
 	connect (ui->pushButton, SIGNAL(clicked()), this,  SLOT(onGo()));
 	connect (this, SIGNAL(wowNewWord(QString)), words, SLOT(add(QString)), Qt::QueuedConnection);
 	connect (words, SIGNAL(cleanWord(QString)), cleanWords, SLOT(add(QString)), Qt::QueuedConnection);
 	connect (cleanWords, SIGNAL(cleanWord(QString, QByteArray)), this, SLOT(returnWord(QString, QByteArray)), Qt::QueuedConnection);
 	connect (this, SIGNAL(translateItBack(QString)), backtransl, SLOT(add(QString)), Qt::QueuedConnection);
+
+	connect (this, SIGNAL(picturize(QString)), pica, SLOT(add(QString)), Qt::QueuedConnection);
+
 	connect (backtransl, SIGNAL(cleanWord(QString, QByteArray)), this, SLOT(saveCard(QString, QByteArray)), Qt::QueuedConnection);
 }
 
@@ -61,6 +65,7 @@ void importerWindow::returnWord(QString word, QByteArray translation)
 			emit translateItBack(h.toPlainText());
 		}
 	}
+	emit picturize(word);
 }
 
 void importerWindow::saveCard   (QString word, QByteArray translation)

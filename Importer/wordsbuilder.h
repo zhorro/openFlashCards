@@ -11,8 +11,6 @@
 
 #include <QThread>
 
-//extern QNetworkAccessManager *manager;
-
 class wordsBuilder : public QThread
 {
 	Q_OBJECT
