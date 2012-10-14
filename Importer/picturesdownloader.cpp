@@ -43,8 +43,8 @@ void picturesDownloader::pageLoaded( bool ok )
 	page.mainFrame()->render(&painter);
 
 	painter.end();
-	QDir::current().mkdir("images");
-	img.save(QString("images/%1.jpeg").arg(words[0]), "JPEG");
+	QDir::current().mkdir("translations");
+	img.save(QString("translations/%1.jpeg").arg(words[0]), "JPEG");
 
 	words.removeFirst();
     next();

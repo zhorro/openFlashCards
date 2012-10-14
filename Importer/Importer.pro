@@ -18,13 +18,15 @@ SOURCES += \
     soundUrlExtractor.cpp \
     picturesdownloader.cpp \
     main.cpp \
-    importerwindow.cpp
+    importerwindow.cpp \
+    wordsimporter.cpp
 
 HEADERS  += \
     wordsbuilder.h \
     urldownloader.h \
     soundUrlExtractor.h \
     picturesdownloader.h \
-    importerwindow.h
+    importerwindow.h \
+    wordsimporter.h
 
 FORMS    += importerwindow.ui
