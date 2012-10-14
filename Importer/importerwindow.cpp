@@ -22,6 +22,8 @@ importerWindow::importerWindow(QWidget *parent) :
 	cleanWords = new wordsBuilder ("es-ru-es");
 	backtransl = new wordsBuilder ("es-ru-es");
 	pica	   = new picturesDownloader();
+	sndUrl     = new soundUrlExtractor("es-ru");
+	sndDownloader = new urlDownloader ();
 
 	connect (ui->pushButton, SIGNAL(clicked()), this,  SLOT(onGo()));
 	connect (this, SIGNAL(wowNewWord(QString)), words, SLOT(add(QString)), Qt::QueuedConnection);
@@ -30,7 +32,10 @@ importerWindow::importerWindow(QWidget *parent) :
 	connect (this, SIGNAL(translateItBack(QString)), backtransl, SLOT(add(QString)), Qt::QueuedConnection);
 
 	connect (this, SIGNAL(picturize(QString)), pica, SLOT(add(QString)), Qt::QueuedConnection);
-
+	connect (this, SIGNAL(soundize(QString)), sndUrl, SLOT(add(QString)), Qt::QueuedConnection);
+	connect (sndUrl, SIGNAL(downloadUrl(QString, QUrl)), sndDownloader, SLOT(add(QString, QUrl)), Qt::QueuedConnection);
+	
+	connect (sndDownloader, SIGNAL(downloadDone(QString, QByteArray)), this, SLOT(saveSnd(QString, QByteArray)), Qt::QueuedConnection);
 	connect (backtransl, SIGNAL(cleanWord(QString, QByteArray)), this, SLOT(saveCard(QString, QByteArray)), Qt::QueuedConnection);
 }
 
@@ -66,6 +71,7 @@ void importerWindow::returnWord(QString word, QByteArray translation)
 		}
 	}
 	emit picturize(word);
+	emit soundize (word);
 }
 
 void importerWindow::saveCard   (QString word, QByteArray translation)
@@ -103,5 +109,14 @@ void importerWindow::saveCard   (QString word, QByteArray translation)
 		else
 			qDebug() << "unknown classes: " << h.classes();
 	}
+}
+
+void importerWindow::saveSnd (QString word, QByteArray sound)
+{
+    QDir::current().mkpath("translations/");
+	QFile soundFile (QString("translations/%1.mp3").arg(word));
+	soundFile.open(QIODevice::WriteOnly);
+	soundFile.write(sound);
+	soundFile.close();
 }
 

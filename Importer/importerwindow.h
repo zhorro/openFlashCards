@@ -7,6 +7,8 @@
 
 #include "wordsbuilder.h"
 #include "picturesdownloader.h"
+#include "soundUrlExtractor.h"
+#include "urldownloader.h"
 
 namespace Ui {
 class importerWindow;
@@ -23,6 +25,7 @@ public:
 public slots:
 	void returnWord (QString word, QByteArray translation = QByteArray ());
 	void saveCard   (QString word, QByteArray card);
+	void saveSnd    (QString word, QByteArray snd);
 
 	void onGo();
 
@@ -36,11 +39,15 @@ private:
 	wordsBuilder * backtransl;
 
 	picturesDownloader * pica;
+	soundUrlExtractor  * sndUrl;
+	urlDownloader	   * sndDownloader;
 
 signals:
 	void wowNewWord (QString word);
 	void translateItBack (QString word);
 	void picturize (QString work);
+	void soundize  (QString work);
+	void downloadSnd (QString, QUrl);
 };
 
 #endif // IMPORTERWINDOW_H
