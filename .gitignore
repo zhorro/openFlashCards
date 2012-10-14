@@ -5,6 +5,7 @@ Importer/images/*
 Importer/ipch/*
 Importer/replays/*
 Importer/translations/*
+Importer/lingvo_replays/*
 Importer/Importer.opensdf
 Importer/Importer.pro.user
 Importer/Importer.sdf

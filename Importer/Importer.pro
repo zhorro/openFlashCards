@@ -12,13 +12,19 @@ TARGET = Importer
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-        importerwindow.cpp \
+SOURCES += \
     wordsbuilder.cpp \
-    picturesdownloader.cpp
+    urldownloader.cpp \
+    soundUrlExtractor.cpp \
+    picturesdownloader.cpp \
+    main.cpp \
+    importerwindow.cpp
 
-HEADERS  += importerwindow.h \
+HEADERS  += \
     wordsbuilder.h \
-    picturesdownloader.h
+    urldownloader.h \
+    soundUrlExtractor.h \
+    picturesdownloader.h \
+    importerwindow.h
 
 FORMS    += importerwindow.ui
