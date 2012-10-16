@@ -1,3 +1,4 @@
+*.user
 Importer-build-*/*
 Importer/debug/*
 Importer/GeneratedFiles/*
