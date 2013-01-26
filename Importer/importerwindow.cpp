@@ -15,7 +15,7 @@
 importerWindow::importerWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::importerWindow),
-    impa(false, "es", "ru", this)
+    impa(false, "it", "ru", this)
 {
     ui->setupUi(this);
 
@@ -37,6 +37,6 @@ void importerWindow::onGo()
 
 void importerWindow::weVeGotTranslation(QString word)
 {
-    ui->translatedWords->append(word);
+    ui->translatedWords->addItem(word);
 }
 
